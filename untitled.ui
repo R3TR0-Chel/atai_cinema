@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1270</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>1231</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="login_button">
+    <property name="geometry">
+     <rect>
+      <x>1144</x>
+      <y>10</y>
+      <width>81</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Log in</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="logo_label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>47</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QScrollArea" name="Main_conteiner">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>89</y>
+     <width>1231</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1229</width>
+      <height>599</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
