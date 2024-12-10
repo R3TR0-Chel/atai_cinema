@@ -1,19 +1,19 @@
 #python -m PyQt5.uic.pyuic -x log_window.ui -o my_ui.py
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1600, 950)
 
         # Установка основного стиля для всего окна
-        # Установка основного стиля для всего окна
         Form.setStyleSheet("""
     QWidget {
         background: qlineargradient(
             spread:pad, x1:0, y1:0, x2:1, y2:1,
-            stop:0 rgba(10, 14, 24, 255),   /* Темнее 1A2232 */
-            stop:1 rgba(38, 50, 74, 255)   /* Светлее 1A2232 */
+            stop:0 rgba(10, 14, 24, 255),
+            stop:1 rgba(38, 50, 74, 255)
         );
         color: white;
     }
@@ -32,7 +32,6 @@ class Ui_Form(object):
         font-size: 14px;
     }
 """)
-
 
         # Верхний фрейм
         self.frame = QtWidgets.QFrame(Form)
@@ -59,9 +58,10 @@ class Ui_Form(object):
         self.logo_label.setPixmap(QtGui.QPixmap("path_to_logo.png"))
         self.logo_label.setScaledContents(True)
         self.logo_label.setObjectName("logo_label")
-        self.logo_label.setPixmap(QtGui.QPixmap("logo.jpg").scaled(self.logo_label.width(), self.logo_label.height(),  QtCore.Qt.KeepAspectRatio,  QtCore.Qt.SmoothTransformation))
+        self.logo_label.setPixmap(
+            QtGui.QPixmap("logo.jpg").scaled(self.logo_label.width(), self.logo_label.height(),
+                                             QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation))
         self.logo_label.setScaledContents(True)
-        
 
         # Основной контейнер (QScrollArea)
         self.Main_conteiner = QtWidgets.QScrollArea(Form)
@@ -78,7 +78,7 @@ class Ui_Form(object):
         self.main_layout.setObjectName("main_layout")
 
         # Добавляем фильмы в контейнер
-        self.add_movies()
+        self.add_movies(Form)
 
         # Устанавливаем содержимое ScrollArea
         self.Main_conteiner.setWidget(self.scrollAreaWidgetContents)
@@ -91,7 +91,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.login_button.setText(_translate("Form", "Log in"))
 
-    def add_movies(self):
+    def add_movies(self, parent):
         # Пример данных о фильмах
         movies = [
             {"title": "The Batman", "genre": "Action", "rating": "8.1", "image": "batman.jpg"},
@@ -139,6 +139,10 @@ class Ui_Form(object):
             # Добавляем фильм в сетку
             grid_layout.addWidget(movie_widget, row, col)
 
+            # Подключение кликов
+            movie_image.mousePressEvent = lambda event, m=movie: self.open_movie_details(parent, m)
+            title_label.clicked.connect(lambda checked, m=movie: self.open_movie_details(parent, m))
+
             col += 1
             if col > 2:  # По три фильма в ряд
                 col = 0
@@ -146,6 +150,25 @@ class Ui_Form(object):
 
         # Добавляем сетку в основной макет
         self.main_layout.addLayout(grid_layout)
+
+    def open_movie_details(self, parent, movie):
+        """
+        Открывает окно с деталями фильма.
+        """
+        from movie_page import Ui_MovieDetailsForm  # Импорт файла с деталями о фильме
+
+        self.movie_details_window = QtWidgets.QWidget()
+        self.ui = Ui_MovieDetailsForm()
+        self.ui.setupUi(self.movie_details_window)
+        self.ui.set_movie_details(
+            title=movie["title"],
+            poster_path=movie["image"],
+            year="2024",  # Подставьте реальные данные
+            duration="120 min",
+            actors=["Actor 1", "Actor 2", "Actor 3"],
+            schedule=["15:30", "18:00", "20:30"]
+        )
+        self.movie_details_window.show()
 
 
 if __name__ == "__main__":
@@ -156,4 +179,3 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-#test
