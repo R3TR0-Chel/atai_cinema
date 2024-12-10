@@ -7,30 +7,32 @@ class Ui_Form(object):
         Form.resize(1600, 950)
 
         # Установка основного стиля для всего окна
+        # Установка основного стиля для всего окна
         Form.setStyleSheet("""
-            QWidget {
-                background: qlineargradient(
-                    spread:pad, x1:0, y1:0, x2:1, y2:1,
-                    stop:0 rgba(18, 32, 47, 255), 
-                    stop:1 rgba(44, 62, 80, 255)
-                );
-                color: white;
-            }
-            QPushButton {
-                background-color: #34495e;
-                border: 1px solid #2c3e50;
-                color: white;
-                font-weight: bold;
-                padding: 8px 16px;
-                border-radius: 5px;
-            }
-            QPushButton:hover {
-                background-color: #2c3e50;
-            }
-            QLabel {
-                font-size: 14px;
-            }
-        """)
+    QWidget {
+        background: qlineargradient(
+            spread:pad, x1:0, y1:0, x2:1, y2:1,
+            stop:0 rgba(10, 14, 24, 255),   /* Темнее 1A2232 */
+            stop:1 rgba(38, 50, 74, 255)   /* Светлее 1A2232 */
+        );
+        color: white;
+    }
+    QPushButton {
+        background-color: #34495e;
+        border: 1px solid #2c3e50;
+        color: white;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 5px;
+    }
+    QPushButton:hover {
+        background-color: #2c3e50;
+    }
+    QLabel {
+        font-size: 14px;
+    }
+""")
+
 
         # Верхний фрейм
         self.frame = QtWidgets.QFrame(Form)
@@ -108,7 +110,7 @@ class Ui_Form(object):
         for movie in movies:
             # Виджет для фильма
             movie_widget = QtWidgets.QWidget()
-            movie_widget.setStyleSheet("background-color: rgba(52, 73, 94, 45); border-radius: 10px; padding: 10px;")
+            movie_widget.setStyleSheet("background-color: rgba(52, 73, 94, 45); border-radius: 10px; padding: 10px; ")
             movie_layout = QtWidgets.QVBoxLayout(movie_widget)
 
             # Изображение фильма
@@ -118,9 +120,8 @@ class Ui_Form(object):
             movie_layout.addWidget(movie_image)
 
             # Название фильма
-            title_label = QtWidgets.QLabel(movie["title"])
-            title_label.setAlignment(QtCore.Qt.AlignCenter)
-            title_label.setStyleSheet("font-size: 16px; font-weight: bold;")
+            title_label = QtWidgets.QPushButton(movie["title"])
+            title_label.setStyleSheet("font-size: 16px; font-weight: bold; ")
             movie_layout.addWidget(title_label)
 
             # Жанр фильма
